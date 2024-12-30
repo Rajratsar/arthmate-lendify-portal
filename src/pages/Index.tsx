@@ -1,7 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail, Phone } from "lucide-react";
+import { useRef } from "react";
 
 const Index = () => {
+  const contactRef = useRef<HTMLDivElement>(null);
+
+  const scrollToContact = () => {
+    contactRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen">
       {/* Navigation */}
@@ -14,7 +21,7 @@ const Index = () => {
             <a href="#" className="text-gray-600 hover:text-blue-600">Resources</a>
             <a href="#" className="text-gray-600 hover:text-blue-600">Company</a>
           </div>
-          <Button>Contact Us</Button>
+          <Button onClick={scrollToContact}>Contact Us</Button>
         </div>
       </nav>
 
@@ -28,7 +35,7 @@ const Index = () => {
             <p className="text-xl text-gray-600 mb-8">
               Enable instant credit for your customers with our comprehensive lending infrastructure
             </p>
-            <Button className="text-lg px-8 py-6">
+            <Button className="text-lg px-8 py-6" onClick={scrollToContact}>
               Get Started <ArrowRight className="ml-2" />
             </Button>
           </div>
@@ -69,9 +76,30 @@ const Index = () => {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Lending?</h2>
           <p className="text-xl mb-8 opacity-90">Join leading businesses that trust Arthmate</p>
-          <Button variant="secondary" size="lg" className="text-blue-600">
+          <Button variant="secondary" size="lg" className="text-blue-600" onClick={scrollToContact}>
             Contact Sales <ArrowRight className="ml-2" />
           </Button>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section ref={contactRef} className="py-20 bg-gray-50" id="contact">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Contact Us</h2>
+          <div className="max-w-lg mx-auto space-y-6">
+            <div className="flex items-center gap-4 justify-center">
+              <Mail className="w-6 h-6 text-blue-600" />
+              <a href="mailto:rvsinghchhotu@omnifi.in" className="text-lg hover:text-blue-600">
+                rvsinghchhotu@omnifi.in
+              </a>
+            </div>
+            <div className="flex items-center gap-4 justify-center">
+              <Phone className="w-6 h-6 text-blue-600" />
+              <a href="tel:+919871569779" className="text-lg hover:text-blue-600">
+                +91 9871569779
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
