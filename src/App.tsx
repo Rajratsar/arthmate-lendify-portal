@@ -11,8 +11,8 @@ const queryClient = new QueryClient();
 
 // Create a single supabase client for interacting with your database
 const supabase = createClient(
-  'https://your-project-url.supabase.co',
-  'your-anon-key'
+  import.meta.env.VITE_SUPABASE_URL || '',
+  import.meta.env.VITE_SUPABASE_ANON_KEY || ''
 );
 
 const App = () => (

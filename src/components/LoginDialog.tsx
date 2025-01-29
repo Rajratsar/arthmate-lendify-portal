@@ -7,8 +7,8 @@ import { createClient } from "@supabase/supabase-js";
 import { Database } from "@/types/supabase";
 
 const supabase = createClient<Database>(
-  'https://your-project-url.supabase.co',
-  'your-anon-key'
+  import.meta.env.VITE_SUPABASE_URL || '',
+  import.meta.env.VITE_SUPABASE_ANON_KEY || ''
 );
 
 export function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
