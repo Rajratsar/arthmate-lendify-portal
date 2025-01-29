@@ -4,12 +4,16 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
-import { createClientComponentClient } from "@supabase/auth-helpers-react";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
-const supabase = createClientComponentClient();
+
+// Create a single supabase client for interacting with your database
+const supabase = createClient(
+  'https://your-project-url.supabase.co',
+  'your-anon-key'
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
