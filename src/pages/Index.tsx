@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, Mail, Phone, MapPin } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail, Phone, MapPin, LogIn } from "lucide-react";
 import { useRef } from "react";
 
 const Index = () => {
@@ -15,13 +15,17 @@ const Index = () => {
       <nav className="fixed w-full bg-white/95 backdrop-blur-sm z-50 border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold text-blue-600">Arthmate</div>
-          <div className="hidden md:flex space-x-6">
+          <div className="hidden md:flex items-center space-x-6">
             <a href="#" className="text-gray-600 hover:text-blue-600">Products</a>
             <a href="#" className="text-gray-600 hover:text-blue-600">Solutions</a>
             <a href="#" className="text-gray-600 hover:text-blue-600">Resources</a>
             <a href="#" className="text-gray-600 hover:text-blue-600">Company</a>
+            <a href="#" className="text-gray-600 hover:text-blue-600" onClick={scrollToContact}>Contact Us</a>
+            <Button variant="outline" className="flex items-center gap-2">
+              <LogIn className="h-4 w-4" />
+              Login
+            </Button>
           </div>
-          <Button onClick={scrollToContact}>Contact Us</Button>
         </div>
       </nav>
 
