@@ -34,8 +34,13 @@ const Index = () => {
   };
 
   const handleCustomerPortalClick = () => {
-    window.location.href = "https://nach.arthmate.com/";
+    // Ensure the URL is properly formatted and includes protocol
+    const portalUrl = "https://nach.arthmate.com";
+    console.log("Redirecting to:", portalUrl); // Debug log
+    window.open(portalUrl, "_blank", "noopener,noreferrer");
   };
+
+  // ... keep existing code (rest of the component remains unchanged)
 
   return (
     <div className="min-h-screen">
