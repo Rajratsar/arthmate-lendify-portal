@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, Mail, Phone, MapPin, LogIn } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail, Phone, MapPin, LogIn, Building } from "lucide-react";
 import { useRef, useState } from "react";
 import { LoginDialog } from "@/components/LoginDialog";
+import { useSession } from "@supabase/auth-helpers-react";
 
 const Index = () => {
   const contactRef = useRef<HTMLDivElement>(null);
   const [loginOpen, setLoginOpen] = useState(false);
+  const session = useSession();
 
   const scrollToContact = () => {
     contactRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -24,14 +26,26 @@ const Index = () => {
             <a href="#" className="text-gray-600 hover:text-blue-600">Company</a>
             <a href="#" className="text-gray-600 hover:text-blue-600" onClick={scrollToContact}>Contact Us</a>
           </div>
-          <Button 
-            variant="outline" 
-            className="hidden md:flex items-center gap-2"
-            onClick={() => setLoginOpen(true)}
-          >
-            <LogIn className="h-4 w-4" />
-            Login
-          </Button>
+          <div className="flex items-center gap-4">
+            {session && (
+              <Button 
+                variant="outline" 
+                className="hidden md:flex items-center gap-2"
+                onClick={() => console.log("Navigate to customer portal")}
+              >
+                <Building className="h-4 w-4" />
+                Customer Portal
+              </Button>
+            )}
+            <Button 
+              variant="outline" 
+              className="hidden md:flex items-center gap-2"
+              onClick={() => setLoginOpen(true)}
+            >
+              <LogIn className="h-4 w-4" />
+              Login
+            </Button>
+          </div>
         </div>
       </nav>
 
