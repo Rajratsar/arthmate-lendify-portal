@@ -1,16 +1,36 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, Mail, Phone, MapPin, LogIn, Building } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail, Phone, MapPin, LogIn, Building, User, LogOut } from "lucide-react";
 import { useRef, useState } from "react";
 import { LoginDialog } from "@/components/LoginDialog";
+import { ProfileDialog } from "@/components/ProfileDialog";
 import { useSession } from "@supabase/auth-helpers-react";
+import { supabase } from "@/integrations/supabase/client";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 
 const Index = () => {
   const contactRef = useRef<HTMLDivElement>(null);
   const [loginOpen, setLoginOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const session = useSession();
 
   const scrollToContact = () => {
     contactRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast.success("Logged out successfully");
+    } catch (error) {
+      console.error("Error logging out:", error);
+      toast.error("Failed to log out");
+    }
   };
 
   return (
@@ -37,19 +57,41 @@ const Index = () => {
                 Customer Portal
               </Button>
             )}
-            <Button 
-              variant="outline" 
-              className="hidden md:flex items-center gap-2"
-              onClick={() => setLoginOpen(true)}
-            >
-              <LogIn className="h-4 w-4" />
-              Login
-            </Button>
+            {session ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="hidden md:flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    Profile
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem onClick={() => setProfileOpen(true)}>
+                    <User className="mr-2 h-4 w-4" />
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleLogout}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button 
+                variant="outline" 
+                className="hidden md:flex items-center gap-2"
+                onClick={() => setLoginOpen(true)}
+              >
+                <LogIn className="h-4 w-4" />
+                Login
+              </Button>
+            )}
           </div>
         </div>
       </nav>
 
       <LoginDialog open={loginOpen} onOpenChange={setLoginOpen} />
+      <ProfileDialog open={profileOpen} onOpenChange={setProfileOpen} />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-br from-blue-50 to-white">
