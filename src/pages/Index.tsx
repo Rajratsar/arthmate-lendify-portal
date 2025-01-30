@@ -33,6 +33,10 @@ const Index = () => {
     }
   };
 
+  const handleCustomerPortalClick = () => {
+    window.location.href = "https://nach.arthmate.com/";
+  };
+
   return (
     <div className="min-h-screen">
       {/* Navigation */}
@@ -51,7 +55,7 @@ const Index = () => {
               <Button 
                 variant="outline" 
                 className="hidden md:flex items-center gap-2"
-                onClick={() => console.log("Navigate to customer portal")}
+                onClick={handleCustomerPortalClick}
               >
                 <Building className="h-4 w-4" />
                 Customer Portal
