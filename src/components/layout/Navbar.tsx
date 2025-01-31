@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { LogIn, Building, User, LogOut } from "lucide-react";
 import { useSession } from "@supabase/auth-helpers-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,6 +19,7 @@ interface NavbarProps {
 
 export const Navbar = ({ setLoginOpen, setProfileOpen, scrollToContact }: NavbarProps) => {
   const session = useSession();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
@@ -29,10 +31,8 @@ export const Navbar = ({ setLoginOpen, setProfileOpen, scrollToContact }: Navbar
     }
   };
 
-  const handleCustomerPortalClick = () => {
-    const portalUrl = "https://nach.arthmate.com";
-    console.log("Redirecting to:", portalUrl);
-    window.open(portalUrl, "_blank", "noopener,noreferrer");
+  const handleCustomerServiceClick = () => {
+    navigate("/customer-service");
   };
 
   return (
@@ -49,7 +49,7 @@ export const Navbar = ({ setLoginOpen, setProfileOpen, scrollToContact }: Navbar
             <Button 
               variant="outline" 
               className="items-center gap-2"
-              onClick={handleCustomerPortalClick}
+              onClick={handleCustomerServiceClick}
             >
               <Building className="h-4 w-4" />
               Customer Service
