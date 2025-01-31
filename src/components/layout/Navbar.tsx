@@ -45,18 +45,18 @@ export const Navbar = ({ setLoginOpen, setProfileOpen, scrollToContact }: Navbar
           <a href="#" className="text-gray-600 hover:text-blue-600">Resources</a>
           <a href="#" className="text-gray-600 hover:text-blue-600">Company</a>
           <a href="#" className="text-gray-600 hover:text-blue-600" onClick={scrollToContact}>Contact Us</a>
-        </div>
-        <div className="flex items-center gap-4">
           {session && (
             <Button 
               variant="outline" 
-              className="hidden md:flex items-center gap-2"
+              className="items-center gap-2"
               onClick={handleCustomerPortalClick}
             >
               <Building className="h-4 w-4" />
               Customer Service
             </Button>
           )}
+        </div>
+        <div className="flex items-center gap-4">
           {session ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
