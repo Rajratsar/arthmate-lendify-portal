@@ -54,7 +54,7 @@ export const Navbar = ({ setLoginOpen, setProfileOpen, scrollToContact }: Navbar
               onClick={handleCustomerPortalClick}
             >
               <Building className="h-4 w-4" />
-              Customer Portal
+              Customer Service
             </Button>
           )}
           {session ? (
