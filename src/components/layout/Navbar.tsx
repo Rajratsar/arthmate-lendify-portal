@@ -23,21 +23,25 @@ export const Navbar = ({ setLoginOpen, setProfileOpen, scrollToContact }: Navbar
 
   const handleLogout = async () => {
     try {
-      console.log("Attempting to log out...");
+      console.log("Starting logout process...");
+      console.log("Current session:", session);
+
       const { error } = await supabase.auth.signOut();
+      
       if (error) {
         console.error("Logout error:", error);
-        throw error;
+        toast.error("Failed to log out");
+        return;
       }
+
+      console.log("Logout successful, clearing session...");
       
-      console.log("Logout successful, session cleared");
-      toast.success("Logged out successfully");
-      
-      // Force a page reload to ensure all auth states are cleared
+      // Force a complete page reload and navigation to home
       window.location.href = "/";
+      
     } catch (error) {
-      console.error("Error logging out:", error);
-      toast.error("Failed to log out");
+      console.error("Error during logout:", error);
+      toast.error("An unexpected error occurred during logout");
     }
   };
 
