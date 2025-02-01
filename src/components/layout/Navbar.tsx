@@ -39,7 +39,8 @@ export const Navbar = ({ setLoginOpen, setProfileOpen, scrollToContact }: Navbar
     <nav className="fixed w-full bg-white/95 backdrop-blur-sm z-50 border-b">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="text-2xl font-bold text-blue-600">Arthmate</div>
-        <div className="hidden md:flex flex-1 items-center justify-center gap-8">
+        
+        <div className="hidden md:flex items-center gap-8">
           <a href="#" className="text-gray-600 hover:text-blue-600">Products</a>
           <a href="#" className="text-gray-600 hover:text-blue-600">Solutions</a>
           <a href="#" className="text-gray-600 hover:text-blue-600">Resources</a>
@@ -48,7 +49,7 @@ export const Navbar = ({ setLoginOpen, setProfileOpen, scrollToContact }: Navbar
           {session && (
             <Button 
               variant="outline" 
-              className="items-center gap-2"
+              className="flex items-center gap-2"
               onClick={handleCustomerServiceClick}
             >
               <Building className="h-4 w-4" />
@@ -56,11 +57,12 @@ export const Navbar = ({ setLoginOpen, setProfileOpen, scrollToContact }: Navbar
             </Button>
           )}
         </div>
+
         <div className="flex items-center gap-4">
           {session ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="hidden md:flex items-center gap-2">
+                <Button variant="outline" className="flex items-center gap-2">
                   <User className="h-4 w-4" />
                   Profile
                 </Button>
@@ -79,7 +81,7 @@ export const Navbar = ({ setLoginOpen, setProfileOpen, scrollToContact }: Navbar
           ) : (
             <Button 
               variant="outline" 
-              className="hidden md:flex items-center gap-2"
+              className="flex items-center gap-2"
               onClick={() => setLoginOpen(true)}
             >
               <LogIn className="h-4 w-4" />

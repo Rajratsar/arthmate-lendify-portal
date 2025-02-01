@@ -9,7 +9,62 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      BIC: {
+        Row: {
+          borrower_name: string | null
+          created_at: string
+          id: number
+          loan_id: string | null
+          mobile_number: number | null
+        }
+        Insert: {
+          borrower_name?: string | null
+          created_at?: string
+          id?: number
+          loan_id?: string | null
+          mobile_number?: number | null
+        }
+        Update: {
+          borrower_name?: string | null
+          created_at?: string
+          id?: number
+          loan_id?: string | null
+          mobile_number?: number | null
+        }
+        Relationships: []
+      }
+      "Loan Details": {
+        Row: {
+          borr_id: number | null
+          created_at: string
+          id: number
+          int_rate: number | null
+          loan_amount: number | null
+        }
+        Insert: {
+          borr_id?: number | null
+          created_at?: string
+          id?: number
+          int_rate?: number | null
+          loan_amount?: number | null
+        }
+        Update: {
+          borr_id?: number | null
+          created_at?: string
+          id?: number
+          int_rate?: number | null
+          loan_amount?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "Loan Details_borr_id_fkey"
+            columns: ["borr_id"]
+            isOneToOne: false
+            referencedRelation: "BIC"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
