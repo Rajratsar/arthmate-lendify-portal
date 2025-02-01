@@ -23,12 +23,18 @@ export const Navbar = ({ setLoginOpen, setProfileOpen, scrollToContact }: Navbar
 
   const handleLogout = async () => {
     try {
+      console.log("Attempting to log out...");
       const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      if (error) {
+        console.error("Logout error:", error);
+        throw error;
+      }
       
-      // Only show success message if no error occurred
+      console.log("Logout successful, session cleared");
       toast.success("Logged out successfully");
-      navigate("/");
+      
+      // Force a page reload to ensure all auth states are cleared
+      window.location.href = "/";
     } catch (error) {
       console.error("Error logging out:", error);
       toast.error("Failed to log out");
