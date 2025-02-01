@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { LogIn, Building, User, LogOut } from "lucide-react";
-import { useSession } from "@supabase/auth-helpers-react";
-import { supabase } from "@/integrations/supabase/client";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
@@ -19,12 +18,17 @@ interface NavbarProps {
 
 export const Navbar = ({ setLoginOpen, setProfileOpen, scrollToContact }: NavbarProps) => {
   const session = useSession();
+  const supabase = useSupabaseClient();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await supabase.auth.signOut();
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      
+      // Only show success message if no error occurred
       toast.success("Logged out successfully");
+      navigate("/");
     } catch (error) {
       console.error("Error logging out:", error);
       toast.error("Failed to log out");
