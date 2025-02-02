@@ -15,10 +15,16 @@ export function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChang
 
   const handleGoogleLogin = async () => {
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
+      console.log("Starting Google login process...");
+      
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`
+          redirectTo: `${window.location.origin}`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
         }
       });
 
@@ -29,6 +35,8 @@ export function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChang
           title: "Error",
           description: error.message,
         });
+      } else {
+        console.log("Google OAuth initiated successfully:", data);
       }
     } catch (error) {
       console.error("Unexpected error during Google login:", error);
